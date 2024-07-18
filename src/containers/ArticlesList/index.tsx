@@ -4,7 +4,7 @@ import Article from "../../components/Article";
 
 const ArticleList=({articles}: IArticleListProps)=>{
     return (
-        <div className="articleList">
+        <div data-testid="article-list" className="articleList">
                     {
                         articles.map((article)=>{
                             const {url, media, title, id} = article;
