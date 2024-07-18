@@ -1,0 +1,70 @@
+@import "../../styles/mixins";
+
+.home{
+    header{
+        position: relative;
+        border: 1px solid #e2e2e2;
+
+        h2, div{
+            text-align: center;
+        }
+    
+        div{
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            label{
+                vertical-align: middle;
+                select{
+                    margin-left: 0.5rem;
+                }
+            }
+
+            @include tablet(){
+                position: static;
+            }
+        }
+    }
+
+    // main {
+    //     // .articleList{
+    //     //     display: flex;
+    //     //     justify-content: center;
+    //     //     flex-wrap: wrap;
+    //     //     gap: 1rem;
+    //     //     padding: 1rem 0;
+
+    //     //     .article{
+    //     //         border: 1px solid #ebebeb;
+    //     //         box-shadow: 0 1px 4px rgba(102,102,102,0.15);
+    //     //         width: 250px;
+    //     //         height: 300px;
+    //     //         cursor: pointer;
+
+    //     //         &:hover{
+    //     //             box-shadow: 0 1px 6px rgba(102,102,102,0.25);
+    //     //         }
+
+    //     //         a{
+    //     //             text-decoration: none;
+    //     //             color: black;
+    //     //         }
+
+    //     //         .imageContainer{
+    //     //             height: 200px;
+
+    //     //             img{
+    //     //                 object-fit: contain;
+    //     //                 height: 100%;
+    //     //                 width: 100%;
+    //     //             }
+    //     //         }
+
+    //     //         p{
+    //     //             padding: 1rem;
+    //     //         }
+    //     //     }
+    //     // }
+
+    // }
+}
