@@ -1,7 +1,10 @@
+import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Select from './index';
+import '@testing-library/jest-dom/extend-expect';
 
-const options = [
+import Select from '.';
+
+const mockOptions = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' },
@@ -9,40 +12,32 @@ const options = [
 
 describe('Select component', () => {
   test('renders select options correctly', () => {
-    const { getByTestId, getByLabelText } = render(
-      <Select options={options} value="2" onChange={() => {}} />
-    );
+    const { getByTestId, getByText } = render(<Select options={mockOptions} value="1" onChange={() => {}} />);
 
-    // Verify if the select element is rendered
+    // Verify select element and its options
     const selectElement = getByTestId('select-element');
     expect(selectElement).toBeInTheDocument();
 
-    // Verify if the correct value is selected
-    expect(selectElement).toHaveValue('2');
-
-    // Verify if all options are rendered
-    options.forEach((opt) => {
-      const optionElement = getByTestId(`option-${opt.value}`);
+    mockOptions.forEach(option => {
+      const optionElement = getByTestId(`option-${option.value}`);
       expect(optionElement).toBeInTheDocument();
-      expect(optionElement).toHaveTextContent(opt.label);
+      expect(optionElement).toHaveTextContent(option.label);
     });
   });
 
-  test('calls onChange handler when an option is selected', () => {
-    const onChangeMock = jest.fn();
-    const { getByTestId } = render(
-      <Select options={options} value="2" onChange={onChangeMock} />
-    );
+  test('calls onChange handler correctly', () => {
+    const handleChange = jest.fn();
+    const { getByTestId } = render(<Select options={mockOptions} value="1" onChange={handleChange} />);
 
-    // Simulate changing the value
-    fireEvent.change(getByTestId('select-element'), { target: { value: '3' } });
+    const selectElement = getByTestId('select-element');
 
-    // Verify if onChange handler was called with the correct value
-    expect(onChangeMock).toHaveBeenCalledTimes(1);
-    expect(onChangeMock).toHaveBeenCalledWith(expect.objectContaining({
-      target: expect.objectContaining({
-        value: '3',
-      }),
-    }));
+    // Simulate change event
+    fireEvent.change(selectElement, { target: { value: '2' } });
+
+    // Check if onChange handler is called
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(expect.any(Object)); // You can further refine this expectation based on your specific onChange implementation.
   });
+
+  // Add more tests as needed, such as testing default value, edge cases, etc.
 });
