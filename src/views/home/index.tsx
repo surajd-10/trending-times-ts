@@ -4,10 +4,11 @@ import { fetchArticles } from "../../models/articles";
 import Select from "../../components/select";
 import { PERIOD_OPTIONS } from "../../constants/constants";
 import ArticleList from "../../containers/ArticlesList";
+import { IResult } from "./index.types";
 
 const Home = () => {
     const [period, setPeriod] = useState(7);
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState<IResult[]>([]);
 
     useEffect(()=>{
         fetchPopularArticles();
@@ -17,7 +18,7 @@ const Home = () => {
         try{
             const result = await fetchArticles(period);
             console.log(result);
-            setArticles(result.data.results);
+            setArticles(result.results);
         }catch(error){
             console.error(error);
         }
